@@ -16,5 +16,23 @@ namespace Smart_Clinic_Appointment_System_API.Service
             return _patientRepo.GetAllPatient();
         }
 
+        public Patient GetbyID(int id)
+        {
+            Patient p = _patientRepo.GetbyId(id);
+            return p;
+        }
+
+        public Patient? Delete(int id)
+        {
+            Patient p = _patientRepo.Delete(id);
+            return p;
+        }
+
+        public Patient Save(Patient patient)
+        {
+            Patient p = _patientRepo.Save(patient);
+            return p;
+        }
+
     }
 }

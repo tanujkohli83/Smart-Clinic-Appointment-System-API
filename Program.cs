@@ -9,8 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<DoctorRepository>();
-builder.Services.AddScoped<PatientRepository>();
+builder.Services.AddSingleton<DoctorRepository>();
+builder.Services.AddSingleton<PatientRepository>();
 builder.Services.AddSingleton<AppointmentRespository>();
 builder.Services.AddScoped<DoctorService>();
 builder.Services.AddScoped<PatientService>();

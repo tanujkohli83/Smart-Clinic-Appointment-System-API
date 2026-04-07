@@ -31,7 +31,7 @@ namespace Smart_Clinic_Appointment_System_API.Controllers
             return Ok(doctor);
         }
 
-        [HttpDelete("get-doctor")]
+        [HttpGet("get-doctor")]
         public IActionResult GetById([FromHeader] int id)
         {
             Doctor d = _doctorService.GetbyId(id);
