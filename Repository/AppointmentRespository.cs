@@ -4,7 +4,7 @@ namespace Smart_Clinic_Appointment_System_API.Repository
 {
     public class AppointmentRespository
     {
-
+        
         List<Appointment> appointments = new List<Appointment>();
 
         public Appointment Save(Appointment appointment)
@@ -13,14 +13,35 @@ namespace Smart_Clinic_Appointment_System_API.Repository
             return appointment;
         }
 
-        public void CheckConflict()
-        {
-
-        }
-
         public List<Appointment> GetAll()
         {
             return appointments;
         }
+
+        public Appointment? GetbyID(int id)
+        {
+            foreach(Appointment a in appointments)
+            {
+                if(a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        public Appointment? Delete(int id)
+        {
+            foreach(Appointment a in appointments)
+            {
+                if(a.Id == id)
+                {
+                    appointments.Remove(a);
+                    return a;
+                }
+            }
+            return null;
+        }
+
     }
 }

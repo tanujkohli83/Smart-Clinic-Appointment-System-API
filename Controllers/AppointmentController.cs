@@ -30,5 +30,19 @@ namespace Smart_Clinic_Appointment_System_API.Controllers
             List<Appointment> a = _appointment.GetAll();
             return Ok(a);
         }
+
+        [HttpGet("get")]
+        public IActionResult GetbyID([FromHeader] int id)
+        {
+            Appointment a = _appointment.GetbyID(id);
+            return Ok(a);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete([FromHeader] int id)
+        {
+            Appointment a = _appointment.Delete(id);
+            return Ok(a);
+        }
     }
 }

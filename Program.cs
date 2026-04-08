@@ -15,8 +15,8 @@ builder.Services.AddSingleton<AppointmentRespository>();
 builder.Services.AddScoped<DoctorService>();
 builder.Services.AddScoped<PatientService>();
 builder.Services.AddScoped<AppointmentService>();
-var app = builder.Build();
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
