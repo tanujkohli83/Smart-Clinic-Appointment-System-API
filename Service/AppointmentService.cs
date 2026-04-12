@@ -1,5 +1,6 @@
 ﻿using Smart_Clinic_Appointment_System_API.Model;
 using Smart_Clinic_Appointment_System_API.Repository;
+using System.Net.NetworkInformation;
 
 namespace Smart_Clinic_Appointment_System_API.Service
 {
@@ -23,11 +24,11 @@ namespace Smart_Clinic_Appointment_System_API.Service
             Doctor? doctor = _doctorRepository.GetById(appointment.DoctorID);
 
 
-            if(patient != null)
+            if (patient != null)
             {
                 if (appointment.PatientID == patient.Id)
                 {
-                    if(doctor != null)
+                    if (doctor != null)
                     {
                         if (appointment.DoctorID == doctor.Id)
                         {
@@ -36,7 +37,7 @@ namespace Smart_Clinic_Appointment_System_API.Service
                             {
                                 appointment.Status = AppointmentStatus.Booked;
                                 return _appointmentRespository.Save(appointment);
-                            }                            
+                            }
                         }
                     }
 
@@ -46,9 +47,9 @@ namespace Smart_Clinic_Appointment_System_API.Service
             return null;
         }
 
-        public List<Appointment> GetAll()
+        public List<Appointment> GetAll(int? doctorID = null, int? PatientID = null)
         {
-            return _appointmentRespository.GetAll();
+            return _appointmentRespository.GetAll(doctorID, PatientID);
         }
 
         public Appointment? GetbyID(int id)
@@ -61,15 +62,59 @@ namespace Smart_Clinic_Appointment_System_API.Service
             return _appointmentRespository.Delete(id);
         }
 
+        public Appointment? AcceptStatus(int AppointmentID)
+        {
+            Appointment? appointment = GetbyID(AppointmentID);
+
+            if(appointment == null)
+            {
+                return null;
+            }
+            if (appointment.Status != AppointmentStatus.Pending)
+            {
+                return null;
+            }
+
+            bool isConflict = CheckConflict(appointment.DoctorID, appointment.AppointmentDateTime);
+
+            if(isConflict != true)
+            {
+                return null;
+
+            } else
+            {
+                return _appointmentRespository.UpdateStatus(AppointmentID, AppointmentStatus.Booked);
+                 
+            }
+        }
+
+        public Appointment? RejectStatus(int AppointmentID)
+        {
+            Appointment? appointment = GetbyID(AppointmentID);
+
+            if (appointment == null)
+            {
+                return null;
+            }
+
+            if (appointment.Status != AppointmentStatus.Pending)
+            {
+                return null;
+            }
+
+            return _appointmentRespository.UpdateStatus(AppointmentID, AppointmentStatus.Cancelled);
+
+        }
+
         public Boolean CheckConflict(int DoctorID, DateTime dateTime)
         {
             List<Appointment> appointments = _appointmentRespository.GetAll();
 
-            foreach(Appointment a in appointments)
+            foreach (Appointment a in appointments)
             {
-                if(a.DoctorID == DoctorID)
+                if (a.DoctorID == DoctorID)
                 {
-                    if(a.AppointmentDateTime == dateTime)
+                    if (a.AppointmentDateTime == dateTime)
                     {
                         return false;
                     }

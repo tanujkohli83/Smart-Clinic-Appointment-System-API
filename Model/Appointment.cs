@@ -5,7 +5,8 @@
     {
         Booked,
         Completed,
-        Cancelled
+        Cancelled,
+        Pending
     }
 
     public class Appointment

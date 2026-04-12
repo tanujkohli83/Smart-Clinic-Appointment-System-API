@@ -6,7 +6,12 @@ namespace Smart_Clinic_Appointment_System_API.Repository
     {
         public readonly List<Patient> _patient = new List<Patient>()
         {
-            new Patient{Id=1, Name= "Tanuj", Email= "tanuj@gmail.com"}
+
+            new Patient{Id=1, Name= "Tanuj", Email= "tanuj@gmail.com"},
+            new Patient{Id=2, Name= "Priya", Email= "priya@gmail.com"},
+            new Patient{Id=3, Name= "Rahul", Email= "rahul@gmail.com"},
+            new Patient{Id=4, Name= "Sneha", Email= "sneha@gmail.com"},
+            new Patient{Id=5, Name= "Amit", Email= "amit@gmail.com"}
         };
 
         public List<Patient> GetAllPatient()
@@ -22,9 +27,9 @@ namespace Smart_Clinic_Appointment_System_API.Repository
 
         public Patient? Delete(int id)
         {
-            foreach(Patient p in _patient)
+            foreach (Patient p in _patient)
             {
-                if(p.Id == id)
+                if (p.Id == id)
                 {
                     _patient.Remove(p);
                     return p;
