@@ -46,7 +46,7 @@ namespace Smart_Clinic_Appointment_System_API.Controllers
         }
 
         [HttpPut("accept-appointment")]
-        public IActionResult AcceptAppointment([FromHeader] int AppointmenetID)
+        public IActionResult AcceptAppointment([FromQuery] int AppointmenetID)
         {
             Appointment? a = _appointment.AcceptStatus(AppointmenetID);
             return Ok(a);
@@ -55,7 +55,8 @@ namespace Smart_Clinic_Appointment_System_API.Controllers
         [HttpPut("reject-appointment")]
         public IActionResult RejectAppointment([FromHeader] int AppointmenetID)
         {
-            return null;
+            Appointment? a = _appointment.RejectStatus(AppointmenetID);
+            return Ok(a);
         }
     }
 

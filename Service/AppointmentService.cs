@@ -75,7 +75,7 @@ namespace Smart_Clinic_Appointment_System_API.Service
                 return null;
             }
 
-            bool isConflict = CheckConflict(appointment.DoctorID, appointment.AppointmentDateTime);
+            bool isConflict = CheckConflict(appointment.DoctorID, appointment.AppointmentDateTime, AppointmentID);
 
             if(isConflict != true)
             {
@@ -106,23 +106,25 @@ namespace Smart_Clinic_Appointment_System_API.Service
 
         }
 
-        public Boolean CheckConflict(int DoctorID, DateTime dateTime)
+        public Boolean CheckConflict(int DoctorID, DateTime dateTime, int? excludeAppointmentId = null)
         {
             List<Appointment> appointments = _appointmentRespository.GetAll();
 
             foreach (Appointment a in appointments)
             {
-                if (a.DoctorID == DoctorID)
+                
+                if (excludeAppointmentId.HasValue && a.Id == excludeAppointmentId.Value)
                 {
-                    if (a.AppointmentDateTime == dateTime)
-                    {
-                        return false;
-                    }
+                    continue;
+                }
+
+                if (a.DoctorID == DoctorID && a.AppointmentDateTime == dateTime)
+                {
+                    return false; 
                 }
             }
 
             return true;
-
         }
     }
 }

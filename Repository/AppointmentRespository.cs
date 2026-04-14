@@ -16,7 +16,8 @@ namespace Smart_Clinic_Appointment_System_API.Repository
             new Appointment { Id = 7, PatientID = 2, DoctorID = 2, AppointmentDateTime = new DateTime(2025, 4, 16, 10, 0, 0), Status = AppointmentStatus.Pending },
             new Appointment { Id = 8, PatientID = 3, DoctorID = 4, AppointmentDateTime = new DateTime(2025, 4, 17, 13, 0, 0), Status = AppointmentStatus.Booked },
             new Appointment { Id = 9, PatientID = 4, DoctorID = 1, AppointmentDateTime = new DateTime(2025, 4, 18, 11, 30, 0), Status = AppointmentStatus.Pending },
-            new Appointment { Id = 10, PatientID = 5, DoctorID = 3, AppointmentDateTime = new DateTime(2025, 4, 19, 16, 0, 0), Status = AppointmentStatus.Booked }
+            new Appointment { Id = 10, PatientID = 5, DoctorID = 3, AppointmentDateTime = new DateTime(2025, 4, 19, 16, 0, 0), Status = AppointmentStatus.Booked },
+            new Appointment {Id = 11, PatientID = 1, DoctorID = 1, AppointmentDateTime = DateTime.Now.AddDays(5).Date.AddHours(10), Status = AppointmentStatus.Pending},
         };
 
 
